@@ -1,0 +1,15 @@
+# Node
+/node_modules
+
+# Build
+/dist
+
+# Env
+*.env
+
+# Config
+config/deploy
+ecosystem.json
+
+# Logs
+/log
