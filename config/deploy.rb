@@ -19,8 +19,8 @@ namespace :deploy do
   task :build do
     on roles(:all) do
       within release_path do
-        execute :npm, "run build"
-        execute :npm, "run typeorm migration:run"
+        execute :npm, "run build --silent"
+        execute :npm, "run typeorm migration:run --silent"
       end
     end
   end
