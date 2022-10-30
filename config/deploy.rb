@@ -29,7 +29,7 @@ namespace :deploy do
   task :restart do
     on roles(:all) do
       within release_path do
-        execute :node, "./dist/registerCommands.js"
+        execute :npm, "run register --silent"
       end
       execute :pm2, :startOrRestart, fetch(:deploy_to) + '/shared/ecosystem.json', '--silent'
     end

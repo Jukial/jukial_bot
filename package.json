@@ -6,6 +6,7 @@
     "prebuild": "rimraf dist",
     "build": "npm run prebuild && tsc",
     "start": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/index.js",
+    "register": "TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/register-commands.js",
     "dev": "nodemon --watch 'src/**' --ext 'ts' --exec 'ts-node -r tsconfig-paths/register src/index.ts'",
     "lint": "eslint --max-warnings 0 src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",

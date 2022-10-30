@@ -10,7 +10,7 @@ class Database {
   public user: Repository<User>
   public link: Repository<Link>
 
-  public async login() {
+  public async login(): Promise<void> {
     this.source = await dataSource.initialize()
 
     this.user = this.source.getRepository(User)
