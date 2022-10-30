@@ -7,7 +7,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2017",
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["*"]
     }
   },
   "exclude": ["node_modules"]

@@ -20,6 +20,7 @@ namespace :deploy do
     on roles(:all) do
       within release_path do
         execute :npm, "run build"
+        execute :npm, "run typeorm migration:run"
       end
     end
   end
