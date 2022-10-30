@@ -1,13 +1,15 @@
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js'
+import { CommandInteraction } from 'discord.js'
+
+import { BaseCommandType } from '@/utils/types'
 
 abstract class BaseCommand {
-  private _command: SlashCommandBuilder
+  private _command: BaseCommandType
 
-  public get command(): SlashCommandBuilder {
+  public get command(): BaseCommandType {
     return this._command
   }
 
-  constructor(command: SlashCommandBuilder) {
+  constructor(command: BaseCommandType) {
     this._command = command
   }
 

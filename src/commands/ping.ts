@@ -1,4 +1,4 @@
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js'
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js'
 
 import { BaseCommand } from '@/client/handlers/structures'
 
@@ -12,8 +12,8 @@ class PingCommand extends BaseCommand {
     super(command)
   }
 
-  run(interaction: CommandInteraction) {
-    interaction.reply({ content: 'Pong' })
+  run(interaction: ChatInputCommandInteraction) {
+    interaction.reply({ content: 'Pong Chat' })
   }
 }
 

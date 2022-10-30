@@ -1,4 +1,8 @@
-import { Collection } from 'discord.js'
+import {
+  Collection,
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder
+} from 'discord.js'
 import { readdir, stat } from 'fs/promises'
 import { extname, join } from 'path'
 
@@ -8,6 +12,7 @@ import { BaseEvent, BaseCommand } from './structures'
 class Handler {
   public events: Collection<string, BaseEvent> = new Collection()
   public commands: Collection<string, BaseCommand> = new Collection()
+  public userCommands: Collection<string, BaseCommand> = new Collection()
 
   constructor(private readonly client: JukialClient) {}
 
@@ -38,7 +43,11 @@ class Handler {
             this.client.on(instance.name, instance.run.bind(instance))
           }
         } else if (instance instanceof BaseCommand) {
-          this.commands.set(instance.command.name, instance)
+          if (instance.command instanceof SlashCommandBuilder) {
+            this.commands.set(instance.command.name, instance)
+          } else if (instance.command instanceof ContextMenuCommandBuilder) {
+            this.userCommands.set(instance.command.name, instance)
+          }
         }
       }
     }
