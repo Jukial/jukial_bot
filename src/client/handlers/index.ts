@@ -8,16 +8,20 @@ import { extname, join } from 'path'
 
 import type JukialClient from '..'
 import { BaseEvent, BaseCommand } from './structures'
+import BaseModalSubmit from './structures/base-modal-submit'
+import BaseSelectMenu from './structures/base-select-menu'
 
 class Handler {
   public events: Collection<string, BaseEvent> = new Collection()
   public commands: Collection<string, BaseCommand> = new Collection()
   public userCommands: Collection<string, BaseCommand> = new Collection()
+  public selectMenus: Collection<string, BaseSelectMenu> = new Collection()
+  public modalSubmits: Collection<string, BaseModalSubmit> = new Collection()
 
   constructor(private readonly client: JukialClient) {}
 
   public async start(): Promise<void> {
-    const dirs = ['events', 'commands']
+    const dirs = ['events', 'commands', 'interactions']
     dirs.forEach(async (dir) => await this._loader(dir))
   }
 
@@ -48,6 +52,10 @@ class Handler {
           } else if (instance.command instanceof ContextMenuCommandBuilder) {
             this.userCommands.set(instance.command.name, instance)
           }
+        } else if (instance instanceof BaseSelectMenu) {
+          this.selectMenus.set(instance.id, instance)
+        } else if (instance instanceof BaseModalSubmit) {
+          this.modalSubmits.set(instance.id, instance)
         }
       }
     }

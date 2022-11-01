@@ -1,4 +1,9 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js'
+import {
+  ActionRowBuilder,
+  ChatInputCommandInteraction,
+  SelectMenuBuilder,
+  SlashCommandBuilder
+} from 'discord.js'
 
 import { BaseCommand } from '@/client/handlers/structures'
 
@@ -13,7 +18,19 @@ class PingCommand extends BaseCommand {
   }
 
   run(interaction: ChatInputCommandInteraction) {
-    interaction.reply({ content: 'Pong Chat' })
+    const selectMenu = new SelectMenuBuilder()
+      .setCustomId('SelectId')
+      .setPlaceholder('Select Test')
+      .addOptions({
+        label: 'Test',
+        description: 'Test',
+        value: 'Test'
+      })
+
+    const components = new ActionRowBuilder<SelectMenuBuilder>().addComponents(
+      selectMenu
+    )
+    interaction.reply({ content: 'Pong Chat', components: [components] })
   }
 }
 
