@@ -1,0 +1,11 @@
+{
+  "link": {
+    "add": {
+      "title": "Ajout d'un lien",
+      "name": "Nom",
+      "default": "Par défaut: Titre du site web",
+      "success": "Votre lien a été ajouté avec succès",
+      "url-invalid": "L'url est invalide"
+    }
+  }
+}

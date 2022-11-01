@@ -2,10 +2,12 @@ import { Client, GatewayIntentBits } from 'discord.js'
 
 import Database from './database'
 import Handler from './handlers'
+import I18N from './i18n'
 
 class JukialClient extends Client {
   public database: Database = new Database()
   public handler: Handler = new Handler(this)
+  public i18n: I18N = new I18N()
 
   constructor() {
     super({

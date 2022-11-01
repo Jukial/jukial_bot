@@ -1,8 +1,15 @@
-import { ContextMenuCommandBuilder, SlashCommandBuilder } from 'discord.js'
+import {
+  ContextMenuCommandBuilder,
+  SlashCommandBuilder,
+  SlashCommandSubcommandsOnlyBuilder
+} from 'discord.js'
 
 export interface BaseEventData {
   name: string
   once?: boolean
 }
 
-export type BaseCommandType = SlashCommandBuilder | ContextMenuCommandBuilder
+export type BaseCommandType =
+  | SlashCommandBuilder
+  | SlashCommandSubcommandsOnlyBuilder
+  | ContextMenuCommandBuilder
