@@ -21,5 +21,13 @@
       "title": "Modifiez votre lien",
       "success": "Votre lien a été modifié avec succès"
     }
+  },
+  "profile": {
+    "not-found": "Cet utilisateur ne possède aucun lien"
+  },
+  "set": {
+    "username": {
+      "success": "Votre nom d'utilisateur a été modifié avec succès"
+    }
   }
 }

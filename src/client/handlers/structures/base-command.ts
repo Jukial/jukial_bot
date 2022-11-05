@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js'
+import { AutocompleteInteraction, CommandInteraction } from 'discord.js'
 
 import { BaseCommandType } from '@/utils/types'
 
@@ -14,6 +14,8 @@ abstract class BaseCommand {
   }
 
   abstract run(interaction: CommandInteraction): any | Promise<any>
+
+  autocomplete?(interaction: AutocompleteInteraction): any | Promise<any>
 }
 
 export default BaseCommand

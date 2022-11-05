@@ -14,6 +14,9 @@ class InteractionCreateEvent extends BaseEvent {
     if (interaction.isChatInputCommand()) {
       const command = this.client.handler.commands.get(interaction.commandName)
       if (command) await command.run(interaction)
+    } else if (interaction.isAutocomplete()) {
+      const command = this.client.handler.commands.get(interaction.commandName)
+      if (command) await command.autocomplete(interaction)
     } else if (interaction.isUserContextMenuCommand()) {
       const command = this.client.handler.userCommands.get(
         interaction.commandName

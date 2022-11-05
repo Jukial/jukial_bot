@@ -12,6 +12,7 @@ export interface BaseEventData {
 export type BaseCommandType =
   | SlashCommandBuilder
   | SlashCommandSubcommandsOnlyBuilder
+  | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>
   | ContextMenuCommandBuilder
 
 export interface I18NVariables {

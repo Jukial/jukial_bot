@@ -9,7 +9,7 @@ class JukialClient extends Client {
   public database: Database = new Database()
   public handler: Handler = new Handler(this)
   public i18n: I18N = new I18N()
-  public collections: Collections = new Collections()
+  public collections: Collections = new Collections(this)
 
   constructor() {
     super({
@@ -22,6 +22,8 @@ class JukialClient extends Client {
   private async _start(): Promise<void> {
     await this.database.login()
     await this.handler.start()
+
+    await this.collections.loadProfileUsernames()
 
     await this.login(process.env.DISCORD_TOKEN)
   }

@@ -21,5 +21,13 @@
       "title": "Edit your link",
       "success": "Your link has been successfully modified"
     }
+  },
+  "profile": {
+    "not-found": "This user does not have any links"
+  },
+  "set": {
+    "username": {
+      "success": "Your username has been successfully modified"
+    }
   }
 }
