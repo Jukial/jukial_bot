@@ -18,13 +18,11 @@
     "jsdom": "^20.0.2",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.10",
-    "valid-url": "^1.0.9"
+    "typeorm": "^0.3.10"
   },
   "devDependencies": {
     "@types/jsdom": "^20.0.0",
     "@types/node": "^18.11.7",
-    "@types/valid-url": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",

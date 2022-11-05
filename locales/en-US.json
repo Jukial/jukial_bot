@@ -1,11 +1,25 @@
 {
   "link": {
+    "error-no-link": "Please add a link first {{cmd}}",
+    "name": "Name",
+    "name-default": "Default: Website title",
+    "url-invalid": "The url is invalid",
     "add": {
       "title": "Add a link",
-      "name": "Name",
-      "default": "Default: Website title",
-      "success": "Your link has been successfully added",
-      "url-invalid": "The url is invalid"
+      "success": "Your link has been successfully added"
+    },
+    "list": {
+      "title": "Your links"
+    },
+    "delete": {
+      "select-placeholder": "Choose links to remove",
+      "result": "Your links were deleted"
+    },
+    "edit": {
+      "select-placeholder": "Choose links to edit",
+      "not-found": "Your link is not found",
+      "title": "Edit your link",
+      "success": "Your link has been successfully modified"
     }
   }
 }

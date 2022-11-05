@@ -1,11 +1,25 @@
 {
   "link": {
+    "error-no-link": "Veuillez d'abord ajouter un lien {{cmd}}",
+    "name": "Nom",
+    "name-default": "Par défaut: Titre du site web",
+    "url-invalid": "L'url est invalide",
     "add": {
       "title": "Ajout d'un lien",
-      "name": "Nom",
-      "default": "Par défaut: Titre du site web",
-      "success": "Votre lien a été ajouté avec succès",
-      "url-invalid": "L'url est invalide"
+      "success": "Votre lien a été ajouté avec succès"
+    },
+    "list": {
+      "title": "Vos liens"
+    },
+    "delete": {
+      "select-placeholder": "Choisissez des liens à supprimer",
+      "result": "Vos liens ont été supprimés"
+    },
+    "edit": {
+      "select-placeholder": "Choisissez des liens à modifier",
+      "not-found": "Votre lien est introuvable",
+      "title": "Modifiez votre lien",
+      "success": "Votre lien a été modifié avec succès"
     }
   }
 }

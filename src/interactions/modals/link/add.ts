@@ -1,13 +1,12 @@
 import { ModalSubmitInteraction } from 'discord.js'
-import { isWebUri } from 'valid-url'
 
 import JukialClient from '@/client'
 import BaseModalSubmit from '@/client/handlers/structures/base-modal-submit'
-import { getTitleFromURL } from '@/utils/functions'
+import { getTitleFromURL, validUrl } from '@/utils/functions'
 
 class LinkAddModalSubmit extends BaseModalSubmit {
   constructor(private readonly client: JukialClient) {
-    super('link-add')
+    super('link-add-modal')
   }
 
   async run(interaction: ModalSubmitInteraction) {
@@ -18,10 +17,9 @@ class LinkAddModalSubmit extends BaseModalSubmit {
     const url = interaction.fields.getTextInputValue('link-add-url')
     let name = interaction.fields.getTextInputValue('link-add-name')
 
-    // FIX: not work with 'https://azzaz -> without .com, .fr, ...
-    if (!isWebUri(url))
+    if (!validUrl(url))
       return interaction.reply({
-        content: this.client.i18n.t('link.add.url-invalid', interaction.locale),
+        content: this.client.i18n.t('link.url-invalid', interaction.locale),
         ephemeral: true
       })
 
@@ -44,7 +42,7 @@ class LinkAddModalSubmit extends BaseModalSubmit {
     })
     await this.client.database.link.save(link)
 
-    interaction.reply({
+    await interaction.reply({
       content: this.client.i18n.t('link.add.success', interaction.locale),
       ephemeral: true
     })

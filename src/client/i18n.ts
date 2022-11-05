@@ -1,3 +1,4 @@
+import { I18NVariables } from '@/utils/types'
 import { Collection } from 'discord.js'
 import { readdir } from 'fs/promises'
 import { join, parse } from 'path'
@@ -23,19 +24,36 @@ class I18N {
     }
   }
 
-  public t(slug: string, language: string = 'en-US'): string {
+  public t(
+    slug: string,
+    language: string = 'en-US',
+    variables?: I18NVariables
+  ): string {
     const translation = this._getTranslation(
       slug.trim().split('.'),
-      this._languages.get(language)
+      this._languages.get(language),
+      variables
     )
     return translation || 'UNKNOW'
   }
 
-  private _getTranslation(slug: string[], language: any) {
+  private _getTranslation(
+    slug: string[],
+    language: any,
+    variables: I18NVariables = {}
+  ): string {
     if (slug.length === 1) {
-      return language[slug[0]]
+      let result = language[slug[0]] as string
+
+      if (result) {
+        Object.keys(variables).forEach((k) => {
+          result = result.replace(`{{${k}}}`, variables[k])
+        })
+      }
+
+      return result
     } else {
-      return this._getTranslation(slug.slice(1), language[slug[0]])
+      return this._getTranslation(slug.slice(1), language[slug[0]], variables)
     }
   }
 }

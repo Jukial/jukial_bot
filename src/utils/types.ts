@@ -13,3 +13,7 @@ export type BaseCommandType =
   | SlashCommandBuilder
   | SlashCommandSubcommandsOnlyBuilder
   | ContextMenuCommandBuilder
+
+export interface I18NVariables {
+  [key: string]: string
+}

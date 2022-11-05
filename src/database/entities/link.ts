@@ -14,7 +14,9 @@ export class Link {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @ManyToOne(() => User, (user) => user.links)
+  @ManyToOne(() => User, (user) => user.links, {
+    onDelete: 'CASCADE'
+  })
   @JoinColumn()
   user: User
 
