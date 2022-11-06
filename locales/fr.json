@@ -6,7 +6,8 @@
     "url-invalid": "L'url est invalide",
     "add": {
       "title": "Ajout d'un lien",
-      "success": "Votre lien a été ajouté avec succès"
+      "success": "Votre lien a été ajouté avec succès",
+      "limit": "Vous ne pouvez pas ajouter plus de 20 liens"
     },
     "list": {
       "title": "Vos liens"
@@ -28,6 +29,10 @@
   "set": {
     "username": {
       "success": "Votre nom d'utilisateur a été modifié avec succès"
+    },
+    "bio": {
+      "title": "Modifiez votre bio",
+      "success": "Votre bio a été modifié avec succès"
     }
   }
 }

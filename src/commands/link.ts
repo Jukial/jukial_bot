@@ -113,7 +113,7 @@ class LinkCommand extends BaseCommand {
   async add(interaction: ChatInputCommandInteraction, user: User) {
     if (user && user.links.length === 20) {
       return interaction.reply({
-        content: 'You cannot have more than 20 links',
+        content: this.client.i18n.t('link.add.limit', interaction.locale),
         ephemeral: true
       })
     }

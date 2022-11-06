@@ -4,7 +4,12 @@ import {
   SlashCommandBuilder,
   SlashCommandStringOption,
   ChatInputCommandInteraction,
-  SlashCommandSubcommandBuilder
+  SlashCommandSubcommandBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  ActionRowBuilder,
+  ModalActionRowComponentBuilder
 } from 'discord.js'
 
 class ProfileCommand extends BaseCommand {
@@ -35,6 +40,18 @@ class ProfileCommand extends BaseCommand {
       })
       .addStringOption(usernameOption)
 
+    const bio = new SlashCommandSubcommandBuilder()
+      .setName('bio')
+      .setNameLocalizations({
+        'en-US': 'bio',
+        fr: 'bio'
+      })
+      .setDescription('Edit your bio')
+      .setDescriptionLocalizations({
+        'en-US': 'Edit your bio',
+        fr: 'Modifiez votre bio'
+      })
+
     const command = new SlashCommandBuilder()
       .setName('set')
       .setNameLocalizations({
@@ -47,6 +64,7 @@ class ProfileCommand extends BaseCommand {
         fr: 'Modifiez votre profil ou des paramètres'
       })
       .addSubcommand(user)
+      .addSubcommand(bio)
 
     super(command)
   }
@@ -57,6 +75,9 @@ class ProfileCommand extends BaseCommand {
     switch (subCommand) {
       case 'username':
         this.username(interaction)
+        break
+      case 'bio':
+        this.bio(interaction)
         break
     }
   }
@@ -85,6 +106,33 @@ class ProfileCommand extends BaseCommand {
       content: this.client.i18n.t('set.username.success', interaction.locale),
       ephemeral: true
     })
+  }
+
+  async bio(interaction: ChatInputCommandInteraction) {
+    const user = await this.client.database.user.findOneBy({
+      id: interaction.user.id
+    })
+
+    const modal = new ModalBuilder()
+      .setCustomId('set-bio-modal')
+      .setTitle(this.client.i18n.t('set.bio.title', interaction.locale))
+
+    const bioInput = new TextInputBuilder()
+      .setCustomId('set-bio-input')
+      .setLabel('Bio')
+      .setStyle(TextInputStyle.Paragraph)
+      .setRequired(false)
+      .setMaxLength(200)
+      .setValue(user.bio || '')
+
+    const bioRow =
+      new ActionRowBuilder<ModalActionRowComponentBuilder>().setComponents(
+        bioInput
+      )
+
+    modal.setComponents([bioRow])
+
+    await interaction.showModal(modal)
   }
 }
 

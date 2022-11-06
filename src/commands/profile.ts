@@ -56,6 +56,9 @@ class ProfileCommand extends BaseCommand {
       })
     }
 
+    let bio = user.bio ? user.bio.split('\n').slice(0, 6).join('\n') : null
+    bio = bio.concat(bio !== user.bio ? '...' : '')
+
     const embed = new EmbedBuilder()
       .setColor('#FDBA74')
       .setAuthor({
@@ -65,9 +68,13 @@ class ProfileCommand extends BaseCommand {
           size: 128
         })
       })
-      .setDescription(
-        user.links.map((link) => `- [${link.name}](${link.url})`).join('\n')
-      )
+      .setDescription(bio)
+      .addFields({
+        name: 'Links',
+        value: user.links
+          .map((link) => `- [${link.name}](${link.url})`)
+          .join('\n')
+      })
 
     await interaction.reply({
       embeds: [embed]

@@ -10,6 +10,9 @@ export class User {
   @Column({ unique: true })
   username: string
 
+  @Column({ length: 200, nullable: true })
+  bio?: string
+
   @OneToMany(() => Link, (link) => link.user)
   links: Link[]
 }

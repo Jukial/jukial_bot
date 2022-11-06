@@ -6,7 +6,8 @@
     "url-invalid": "The url is invalid",
     "add": {
       "title": "Add a link",
-      "success": "Your link has been successfully added"
+      "success": "Your link has been successfully added",
+      "limit": "You cannot have more than 20 links"
     },
     "list": {
       "title": "Your links"
@@ -28,6 +29,10 @@
   "set": {
     "username": {
       "success": "Your username has been successfully modified"
+    },
+    "bio": {
+      "title": "Edit your bio",
+      "success": "Your bio has been successfully modified"
     }
   }
 }
