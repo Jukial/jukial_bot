@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  chatInputApplicationCommandMention,
   ModalSubmitInteraction,
   SelectMenuBuilder
 } from 'discord.js'
@@ -21,17 +22,17 @@ class LinkEditModalSubmit extends BaseModalSubmit {
       relations: ['links']
     })
 
-    if (!user || !user.links.length) {
-      const subCmdName = `</link add:${interaction.message.interaction.id}>`
-
+    if (!user || !user.links.length)
       return interaction.reply({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.message.interaction.commandName,
+            'add',
+            interaction.message.interaction.id
+          )
         }),
-        components: [],
-        ephemeral: true
+        components: []
       })
-    }
 
     const link = await this.client.database.link.findOne({
       where: {
@@ -87,6 +88,8 @@ class LinkEditModalSubmit extends BaseModalSubmit {
     const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents(
       selectMenu
     )
+
+    this.client.collections.linkEditIds.delete(interaction.user.id)
 
     await interaction.reply({
       content: this.client.i18n.t('link.edit.success', interaction.locale),

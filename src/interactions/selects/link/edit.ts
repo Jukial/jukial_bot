@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  chatInputApplicationCommandMention,
   ModalActionRowComponentBuilder,
   ModalBuilder,
   SelectMenuInteraction,
@@ -23,16 +24,17 @@ class LinkEditSelectMenu extends BaseSelectMenu {
       relations: ['links']
     })
 
-    if (!user || !user.links.length) {
-      const subCmdName = `</link add:${interaction.message.interaction.id}>`
-
+    if (!user || !user.links.length)
       return interaction.update({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.message.interaction.commandName,
+            'add',
+            interaction.message.interaction.id
+          )
         }),
         components: []
       })
-    }
 
     const link = user.links.find((l) => l.id === interaction.values[0])
 

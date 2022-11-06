@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  chatInputApplicationCommandMention,
   SelectMenuBuilder,
   SelectMenuInteraction
 } from 'discord.js'
@@ -22,16 +23,17 @@ class LinkDeleteSelectMenu extends BaseSelectMenu {
       relations: ['links']
     })
 
-    if (!user || !user.links.length) {
-      const subCmdName = `</link add:${interaction.message.interaction.id}>`
-
+    if (!user || !user.links.length)
       return interaction.update({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.message.interaction.commandName,
+            'add',
+            interaction.message.interaction.id
+          )
         }),
         components: []
       })
-    }
 
     await this.client.database.link.delete(interaction.values)
 

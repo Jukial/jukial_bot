@@ -24,7 +24,8 @@
     }
   },
   "profile": {
-    "not-found": "This user does not have any links"
+    "not-found": "This user does not have any profile",
+    "links": "Links"
   },
   "set": {
     "username": {

@@ -1,5 +1,6 @@
 import {
   ActionRowBuilder,
+  chatInputApplicationCommandMention,
   ChatInputCommandInteraction,
   EmbedBuilder,
   ModalActionRowComponentBuilder,
@@ -152,16 +153,17 @@ class LinkCommand extends BaseCommand {
   }
 
   async list(interaction: ChatInputCommandInteraction, user: User) {
-    if (!user || !user.links.length) {
-      const subCmdName = `</${interaction.commandName} add:${interaction.commandId}>`
-
+    if (!user || !user.links.length)
       return interaction.reply({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.commandName,
+            'add',
+            interaction.commandId
+          )
         }),
         ephemeral: true
       })
-    }
 
     const embed = new EmbedBuilder()
       .setColor('#FDBA74')
@@ -184,16 +186,17 @@ class LinkCommand extends BaseCommand {
   }
 
   async remove(interaction: ChatInputCommandInteraction, user: User) {
-    if (!user || !user.links.length) {
-      const subCmdName = `</${interaction.commandName} add:${interaction.commandId}>`
-
+    if (!user || !user.links.length)
       return interaction.reply({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.commandName,
+            'add',
+            interaction.commandId
+          )
         }),
         ephemeral: true
       })
-    }
 
     const selectMenu = new SelectMenuBuilder()
       .setCustomId('link-delete-select')
@@ -219,16 +222,17 @@ class LinkCommand extends BaseCommand {
   }
 
   async edit(interaction: ChatInputCommandInteraction, user: User) {
-    if (!user || !user.links.length) {
-      const subCmdName = `</${interaction.commandName} add:${interaction.commandId}>`
-
+    if (!user || !user.links.length)
       return interaction.reply({
         content: this.client.i18n.t('link.error-no-link', interaction.locale, {
-          cmd: subCmdName
+          cmd: chatInputApplicationCommandMention(
+            interaction.commandName,
+            'add',
+            interaction.commandId
+          )
         }),
         ephemeral: true
       })
-    }
 
     const selectMenu = new SelectMenuBuilder()
       .setCustomId('link-edit-select')

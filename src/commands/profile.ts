@@ -49,7 +49,7 @@ class ProfileCommand extends BaseCommand {
       relations: ['links']
     })
 
-    if (!user || !user.links.length) {
+    if (!user || (!user.links.length && !user.bio)) {
       return interaction.reply({
         content: this.client.i18n.t('profile.not-found', interaction.locale),
         ephemeral: true
@@ -59,18 +59,20 @@ class ProfileCommand extends BaseCommand {
     let bio = user.bio ? user.bio.split('\n').slice(0, 6).join('\n') : null
     if (bio !== user.bio) bio = bio.concat('...')
 
+    const userAvatar = (
+      await this.client.users.fetch(user.id, { cache: true })
+    ).displayAvatarURL({ extension: 'png', size: 128 })
+
     const embed = new EmbedBuilder()
       .setColor('#FDBA74')
       .setAuthor({
-        name: interaction.user.tag,
-        iconURL: interaction.user.displayAvatarURL({
-          extension: 'png',
-          size: 128
-        })
+        name: user.username,
+        iconURL: userAvatar,
+        url: `https://discord.com/users/${user.id}`
       })
       .setDescription(bio)
       .addFields({
-        name: 'Links',
+        name: this.client.i18n.t('profile.links', interaction.locale),
         value: user.links
           .map((link) => `- [${link.name}](${link.url})`)
           .join('\n')

@@ -24,7 +24,8 @@
     }
   },
   "profile": {
-    "not-found": "Cet utilisateur ne possède aucun lien"
+    "not-found": "Cet utilisateur ne possède aucun profil",
+    "links": "Liens"
   },
   "set": {
     "username": {
