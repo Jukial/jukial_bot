@@ -6,7 +6,10 @@ import {
   ChatInputCommandInteraction,
   EmbedBuilder,
   AutocompleteInteraction,
-  ApplicationCommandOptionChoiceData
+  ApplicationCommandOptionChoiceData,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder
 } from 'discord.js'
 
 class ProfileCommand extends BaseCommand {
@@ -78,8 +81,18 @@ class ProfileCommand extends BaseCommand {
           .join('\n')
       })
 
+    const reportButton = new ButtonBuilder()
+      .setCustomId(`report-user-button${user.id}`)
+      .setStyle(ButtonStyle.Danger)
+      .setLabel(this.client.i18n.t('profile.report', interaction.locale))
+
+    const rowReport = new ActionRowBuilder<ButtonBuilder>().setComponents(
+      reportButton
+    )
+
     await interaction.reply({
-      embeds: [embed]
+      embeds: [embed],
+      components: [rowReport]
     })
   }
 

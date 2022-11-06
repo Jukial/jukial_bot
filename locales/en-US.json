@@ -25,7 +25,13 @@
   },
   "profile": {
     "not-found": "This user does not have any profile",
-    "links": "Links"
+    "links": "Links",
+    "report": "Report the user"
+  },
+  "report": {
+    "title": "Reporting",
+    "reason": "Reason",
+    "success": "Your report has been registered"
   },
   "set": {
     "username": {

@@ -44,7 +44,7 @@ class LinkEditSelectMenu extends BaseSelectMenu {
       })
 
     const modal = new ModalBuilder()
-      .setCustomId('link-edit-modal')
+      .setCustomId(`link-edit-modal${link.id}`)
       .setTitle(this.client.i18n.t('link.edit.title', interaction.locale))
 
     const urlField = new TextInputBuilder()
@@ -74,8 +74,6 @@ class LinkEditSelectMenu extends BaseSelectMenu {
       )
 
     modal.setComponents([urlRow, nameRow])
-
-    this.client.collections.linkEditIds.set(interaction.user.id, link.id)
 
     await interaction.showModal(modal)
   }

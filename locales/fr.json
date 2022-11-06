@@ -25,7 +25,13 @@
   },
   "profile": {
     "not-found": "Cet utilisateur ne possède aucun profil",
-    "links": "Liens"
+    "links": "Liens",
+    "report": "Signaler l'utilisateur"
+  },
+  "report": {
+    "title": "Signalement",
+    "reason": "Raison",
+    "success": "Votre signalement a bien été enregistré"
   },
   "set": {
     "username": {

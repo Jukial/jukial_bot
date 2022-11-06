@@ -34,11 +34,8 @@ class LinkEditModalSubmit extends BaseModalSubmit {
         components: []
       })
 
-    const link = await this.client.database.link.findOne({
-      where: {
-        id: this.client.collections.linkEditIds.get(interaction.user.id)
-      }
-    })
+    const id = interaction.customId.replace(this.id, '').trim()
+    const link = user.links.find((l) => l.id === id)
 
     if (!link)
       return interaction.reply({
@@ -88,8 +85,6 @@ class LinkEditModalSubmit extends BaseModalSubmit {
     const row = new ActionRowBuilder<SelectMenuBuilder>().setComponents(
       selectMenu
     )
-
-    this.client.collections.linkEditIds.delete(interaction.user.id)
 
     await interaction.reply({
       content: this.client.i18n.t('link.edit.success', interaction.locale),

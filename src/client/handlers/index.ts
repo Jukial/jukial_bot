@@ -8,6 +8,7 @@ import { extname, join } from 'path'
 
 import type JukialClient from '..'
 import { BaseEvent, BaseCommand } from './structures'
+import BaseButton from './structures/base-button'
 import BaseModalSubmit from './structures/base-modal-submit'
 import BaseSelectMenu from './structures/base-select-menu'
 
@@ -17,6 +18,7 @@ class Handler {
   public userCommands: Collection<string, BaseCommand> = new Collection()
   public selectMenus: Collection<string, BaseSelectMenu> = new Collection()
   public modalSubmits: Collection<string, BaseModalSubmit> = new Collection()
+  public buttons: Collection<string, BaseButton> = new Collection()
 
   constructor(private readonly client: JukialClient) {}
 
@@ -56,6 +58,8 @@ class Handler {
           this.selectMenus.set(instance.id, instance)
         } else if (instance instanceof BaseModalSubmit) {
           this.modalSubmits.set(instance.id, instance)
+        } else if (instance instanceof BaseButton) {
+          this.buttons.set(instance.id, instance)
         }
       }
     }

@@ -23,13 +23,18 @@ class InteractionCreateEvent extends BaseEvent {
       )
       if (command) await command.run(interaction)
     } else if (interaction.isSelectMenu()) {
-      const selectMenu = this.client.handler.selectMenus.get(
-        interaction.customId
+      const selectMenu = this.client.handler.selectMenus.find((_value, key) =>
+        interaction.customId.startsWith(key)
       )
       if (selectMenu) await selectMenu.run(interaction)
     } else if (interaction.isModalSubmit()) {
-      const modalSubmit = this.client.handler.modalSubmits.get(
-        interaction.customId
+      const modalSubmit = this.client.handler.modalSubmits.find((_value, key) =>
+        interaction.customId.startsWith(key)
+      )
+      if (modalSubmit) await modalSubmit.run(interaction)
+    } else if (interaction.isButton()) {
+      const modalSubmit = this.client.handler.buttons.find((_value, key) =>
+        interaction.customId.startsWith(key)
       )
       if (modalSubmit) await modalSubmit.run(interaction)
     }

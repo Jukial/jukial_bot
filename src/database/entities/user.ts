@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 
 import { Link } from './link'
+import { Report } from './report'
 
 @Entity()
 export class User {
@@ -15,4 +16,7 @@ export class User {
 
   @OneToMany(() => Link, (link) => link.user)
   links: Link[]
+
+  @OneToMany(() => Report, (report) => report.user)
+  reports: Report[]
 }
