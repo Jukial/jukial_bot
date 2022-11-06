@@ -57,7 +57,7 @@ class ProfileCommand extends BaseCommand {
     }
 
     let bio = user.bio ? user.bio.split('\n').slice(0, 6).join('\n') : null
-    bio = bio.concat(bio !== user.bio ? '...' : '')
+    if (bio !== user.bio) bio = bio.concat('...')
 
     const embed = new EmbedBuilder()
       .setColor('#FDBA74')
