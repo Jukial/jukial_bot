@@ -2,15 +2,17 @@ import axios from 'axios'
 import { JSDOM } from 'jsdom'
 
 export async function getTitleFromURL(url: string): Promise<string> {
-  const fetchUrl = new URL(url)
-  const res = await axios.get(fetchUrl.toString())
+  try {
+    const res = await axios.get(url)
+    const doc = new JSDOM(res.data, { contentType: 'text/html' })
+    const title = doc.window.document
+      .querySelector('head')
+      .querySelectorAll('title')[0]
 
-  const doc = new JSDOM(res.data, { contentType: 'text/html' })
-  const title = doc.window.document
-    .querySelector('head')
-    .querySelectorAll('title')[0]
-
-  return title.innerHTML || fetchUrl.hostname
+    return title?.innerHTML || getDomainName(url)
+  } catch (_err) {
+    return getDomainName(url)
+  }
 }
 
 export function validUrl(url: string): boolean {
@@ -23,4 +25,9 @@ export function validUrl(url: string): boolean {
       '(\\#[-a-z\\d_]*)?$', // validate fragment locator
     'i'
   ).test(url)
+}
+
+export function getDomainName(url: string): string {
+  const fetchUrl = new URL(url).hostname.split('.')
+  return fetchUrl[fetchUrl.length - 2]
 }

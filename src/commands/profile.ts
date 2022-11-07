@@ -1,5 +1,7 @@
 import JukialClient from '@/client'
 import { BaseCommand } from '@/client/handlers/structures'
+import { getDomainName } from '@/utils/functions'
+import { LinkIcon } from '@/utils/types'
 import {
   SlashCommandBuilder,
   SlashCommandStringOption,
@@ -76,13 +78,52 @@ class ProfileCommand extends BaseCommand {
       })
       .setDescription(bio)
 
-    if (user.links.length)
-      embed.addFields({
-        name: this.client.i18n.t('profile.links', interaction.locale),
-        value: user.links
-          .map((link) => `- [${link.name}](${link.url})`)
-          .join('\n')
+    if (user.links.length) {
+      let links = user.links.map((link) => {
+        const icon =
+          LinkIcon[getDomainName(link.url).toUpperCase()] || LinkIcon.DEFAULT
+        return `- ${icon} [${link.name}](${link.url})`
       })
+
+      if (links.join('\n').length <= 1024) {
+        embed.addFields({
+          name: this.client.i18n.t('profile.links', interaction.locale),
+          value: links.join('\n')
+        })
+      } else {
+        // FIX: Fix with length verification on add/edit or add categories with limit
+        const splitLinks: string[][] = []
+        while (links.length > 0) {
+          splitLinks.push([])
+          while (
+            splitLinks[splitLinks.length - 1].join('\n').length < 1024 &&
+            links.length > 0
+          ) {
+            const link = links[0]
+            if (
+              splitLinks[splitLinks.length - 1].join('\n').length +
+                link.length >
+              1024
+            ) {
+              break
+            } else {
+              splitLinks[splitLinks.length - 1].push(links[0])
+              links = links.slice(1)
+            }
+          }
+        }
+
+        splitLinks.forEach((link, i) => {
+          embed.addFields({
+            name:
+              this.client.i18n.t('profile.links', interaction.locale) +
+              ` ${i + 1}`,
+            value: link.join('\n'),
+            inline: true
+          })
+        })
+      }
+    }
 
     const reportButton = new ButtonBuilder()
       .setCustomId(`report-user-button${user.id}`)
