@@ -39,6 +39,7 @@ class ProfileCommand extends BaseCommand {
         'en-US': 'Show profile of user',
         fr: "Affichez le profil de l'utilisateur"
       })
+      .setDMPermission(true)
       .addStringOption(usernameOption)
 
     super(command)
@@ -74,7 +75,9 @@ class ProfileCommand extends BaseCommand {
         url: `https://discord.com/users/${user.id}`
       })
       .setDescription(bio)
-      .addFields({
+
+    if (user.links.length)
+      embed.addFields({
         name: this.client.i18n.t('profile.links', interaction.locale),
         value: user.links
           .map((link) => `- [${link.name}](${link.url})`)

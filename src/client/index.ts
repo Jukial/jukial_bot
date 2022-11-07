@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits } from 'discord.js'
+import { Client } from 'discord.js'
 
 import Database from './database'
 import Handler from './handlers'
@@ -13,7 +13,7 @@ class JukialClient extends Client {
 
   constructor() {
     super({
-      intents: [GatewayIntentBits.Guilds]
+      intents: []
     })
 
     this._start()

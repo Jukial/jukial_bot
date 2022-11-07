@@ -77,6 +77,7 @@ class LinkCommand extends BaseCommand {
         'en-US': 'Manage your links',
         fr: 'Gérez vos liens'
       })
+      .setDMPermission(true)
       .addSubcommand(add)
       .addSubcommand(remove)
       .addSubcommand(list)

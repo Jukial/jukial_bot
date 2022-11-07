@@ -63,6 +63,7 @@ class ProfileCommand extends BaseCommand {
         'en-US': 'Edit your profile or settings',
         fr: 'Modifiez votre profil ou des paramètres'
       })
+      .setDMPermission(true)
       .addSubcommand(user)
       .addSubcommand(bio)
 
@@ -123,7 +124,7 @@ class ProfileCommand extends BaseCommand {
       .setStyle(TextInputStyle.Paragraph)
       .setRequired(false)
       .setMaxLength(200)
-      .setValue(user.bio || '')
+      .setValue(user?.bio || '')
 
     const bioRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().setComponents(
