@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+      time: '09:00'
+      timezone: 'Europe/Paris'
+    target-branch: 'dependabot'
+    reviewers:
+      - 'Natchii59'
+    commit-message:
+      prefix: 'npm'
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: 'bundler'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+      time: '09:00'
+      timezone: 'Europe/Paris'
+    target-branch: 'dependabot'
+    reviewers:
+      - 'Natchii59'
+    commit-message:
+      prefix: 'bundler'
+    open-pull-requests-limit: 10
