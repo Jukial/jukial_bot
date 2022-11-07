@@ -11,5 +11,6 @@ export default new DataSource({
   database: process.env.DB_DATABASE,
   entities: [join(__dirname, 'entities', '*.{ts,js}')],
   synchronize: false,
-  migrations: [join(__dirname, 'migrations', '*.{ts,js}')]
+  migrations: [join(__dirname, 'migrations', '*.{ts,js}')],
+  logging: process.env.DB_LOGGING === 'true' ? 'all' : false
 })
