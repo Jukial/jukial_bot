@@ -10,10 +10,8 @@
 
 ## Author
 
-**Jukial** © [Natchii59](https://github.com/Natchii59).
-
+**Jukial** © [Natchii59](https://github.com/Natchii59).  
 Authored and maintained by Natchii59.
 
-> Github [@Natchii59](https://github.com/Natchii59)
-
+> Github [@Natchii59](https://github.com/Natchii59)  
 > Website [natchi.fr](https://www.natchi.fr)
