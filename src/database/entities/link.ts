@@ -23,9 +23,11 @@ export class Link {
   @RelationId((link: Link) => link.user)
   userId: User['id']
 
-  @Column()
+  @Column({
+    length: 100
+  })
   url: string
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, length: 50 })
   name: string
 }

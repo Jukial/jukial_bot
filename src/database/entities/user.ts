@@ -8,7 +8,7 @@ export class User {
   @PrimaryColumn()
   id: string
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 40 })
   username: string
 
   @Column({ length: 200, nullable: true })

@@ -58,7 +58,7 @@ class LinkEditModalSubmit extends BaseModalSubmit {
     await this.client.database.link.save({
       ...link,
       url,
-      name
+      name: name.slice(0, 50)
     })
 
     user = await this.client.database.user.findOne({

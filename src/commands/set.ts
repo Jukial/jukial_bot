@@ -26,8 +26,9 @@ class ProfileCommand extends BaseCommand {
         fr: "Votre nom d'utilisateur"
       })
       .setRequired(true)
+      .setMaxLength(40)
 
-    const user = new SlashCommandSubcommandBuilder()
+    const username = new SlashCommandSubcommandBuilder()
       .setName('username')
       .setNameLocalizations({
         'en-US': 'username',
@@ -64,7 +65,7 @@ class ProfileCommand extends BaseCommand {
         fr: 'Modifiez votre profil ou des paramètres'
       })
       .setDMPermission(true)
-      .addSubcommand(user)
+      .addSubcommand(username)
       .addSubcommand(bio)
 
     super(command)

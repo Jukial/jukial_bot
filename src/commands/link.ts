@@ -129,6 +129,7 @@ class LinkCommand extends BaseCommand {
       .setLabel('Url')
       .setRequired(true)
       .setStyle(TextInputStyle.Short)
+      .setMaxLength(100)
 
     const nameField = new TextInputBuilder()
       .setCustomId('link-add-name')
@@ -138,6 +139,7 @@ class LinkCommand extends BaseCommand {
       )
       .setRequired(false)
       .setStyle(TextInputStyle.Short)
+      .setMaxLength(50)
 
     const urlRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().setComponents(

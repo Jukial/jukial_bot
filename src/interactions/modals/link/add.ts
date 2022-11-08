@@ -30,14 +30,14 @@ class LinkAddModalSubmit extends BaseModalSubmit {
     if (!user) {
       const newUser = this.client.database.user.create({
         id: interaction.user.id,
-        username: interaction.user.tag
+        username: interaction.user.tag.slice(0, 40)
       })
       user = await this.client.database.user.save(newUser)
       this.client.collections.profileUsernames.set(user.id, user.username)
     }
 
     const link = this.client.database.link.create({
-      name,
+      name: name.slice(0, 50),
       url,
       user
     })

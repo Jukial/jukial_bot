@@ -25,7 +25,7 @@ class SetBioModalSubmit extends BaseModalSubmit {
     if (!updated.affected) {
       const user = this.client.database.user.create({
         id: interaction.user.id,
-        username: interaction.user.tag,
+        username: interaction.user.tag.slice(0, 40),
         bio
       })
       await this.client.database.user.save(user)

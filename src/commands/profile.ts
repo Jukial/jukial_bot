@@ -79,37 +79,32 @@ class ProfileCommand extends BaseCommand {
       .setDescription(bio)
 
     if (user.links.length) {
-      let links = user.links.map((link) => {
-        const icon =
-          LinkIcon[getDomainName(link.url).toUpperCase()] || LinkIcon.DEFAULT
-        return `- ${icon} [${link.name}](${link.url})`
-      })
+      const links = user.links
+        .sort((a, b) => {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+          else if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+          else return 0
+        })
+        .map((link) => {
+          const icon =
+            LinkIcon[getDomainName(link.url).toUpperCase()] || LinkIcon.DEFAULT
+          return `- ${icon} [${link.name}](${link.url})`
+        })
 
-      if (links.join('\n').length <= 1024) {
+      if (links.join('\n').length < 1024) {
         embed.addFields({
           name: this.client.i18n.t('profile.links', interaction.locale),
           value: links.join('\n')
         })
       } else {
-        // FIX: Fix with length verification on add/edit or add categories with limit
-        const splitLinks: string[][] = []
-        while (links.length > 0) {
-          splitLinks.push([])
-          while (
-            splitLinks[splitLinks.length - 1].join('\n').length < 1024 &&
-            links.length > 0
-          ) {
-            const link = links[0]
-            if (
-              splitLinks[splitLinks.length - 1].join('\n').length +
-                link.length >
-              1024
-            ) {
-              break
-            } else {
-              splitLinks[splitLinks.length - 1].push(links[0])
-              links = links.slice(1)
-            }
+        const splitLinks: string[][] = [[]]
+
+        for await (const link of links) {
+          const lastLinks = splitLinks[splitLinks.length - 1]
+          if (lastLinks.join('\n').length + link.length >= 1024) {
+            splitLinks.push([link])
+          } else {
+            lastLinks.push(link)
           }
         }
 

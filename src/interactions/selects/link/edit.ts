@@ -53,6 +53,7 @@ class LinkEditSelectMenu extends BaseSelectMenu {
       .setRequired(true)
       .setStyle(TextInputStyle.Short)
       .setValue(link.url)
+      .setMaxLength(100)
 
     const nameField = new TextInputBuilder()
       .setCustomId('link-edit-name')
@@ -63,6 +64,7 @@ class LinkEditSelectMenu extends BaseSelectMenu {
       .setRequired(false)
       .setStyle(TextInputStyle.Short)
       .setValue(link.name)
+      .setMaxLength(50)
 
     const urlRow =
       new ActionRowBuilder<ModalActionRowComponentBuilder>().setComponents(
